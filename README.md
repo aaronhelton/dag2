@@ -11,6 +11,7 @@ Features:
 * Uses Bootstrap for modern-looking layout
 * Large Discovery sidebar to facilitate content discovery
 * Shows how to make use of custom metadata schemas
+* Replaces sitewide "news.xmlui" with configurable external RSS feeds
 
 (Planned)
 
@@ -23,4 +24,4 @@ Requirements:
 * DSpace 3x.  It will probably work on DSpace 1.8.x as well, but I am not testing against it.
 * Discovery must be enabled!
 
-If you spot more, let me know!
+If you spot more, let me know.
