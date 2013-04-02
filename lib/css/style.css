@@ -1,0 +1,100 @@
+
+    body {
+	font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .mini-navbar {
+        margin-top: 0px;
+        padding-top: 5px;
+        margin-bottom: 0px;
+	text-align: right;
+        font-size: 0.8em;
+        height: 15px;
+    }
+    
+    .languages {
+	height: 20px;
+	font-size: .8em;
+    }
+
+    .languages ul {
+	text-align: right; /* *** latin convention *** */ 
+	margin: 0;
+    }
+
+    .languages ul li {
+	display: inline;
+	padding-right: 1em; /* *** latin convention *** */
+    }
+    #arabic {
+	direction: rtl;
+	font-size: 1.15em;
+	font-family: Tahoma, Arial, "Arabic Transparent";
+    }
+    #chinese {
+	font-size: .95em;
+    }
+
+    #brandbar {
+        height: 25px;
+	/* height: 1.9em; */
+	background-color: #C2C6CF;
+	background-image: url(../img/brandbarbkgd.jpg);
+	background-repeat: repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 76%;
+	color: #AAAEB7;
+    }   
+
+    #brandbar .unicon { 
+	padding-top: .2em;
+	padding-right: .4em;
+    }
+
+    #brandbar .welcome { 
+	color: #333;
+	display: block;
+	float: left;
+	font-size: .9em;
+	padding-top: .5em;
+    }
+
+    #brandbar .welcome a {
+	text-decoration: none;
+	color: #1e1e1e;
+    }
+
+    #brandbar a:hover {
+	text-decoration: underline;
+	color: #1e1e1e;
+    }
+
+    #brandbar #searchfrm { 
+	float: right;
+	text-align: right;
+	margin-top: 0;
+	margin-bottom: 0;
+    }
+
+    #brandbar #searchfrm label { /*hidden*/
+	position: absolute;
+	overflow: hidden;
+	font-size: 88%;
+	top: -500px;
+    }
+
+    #brandbar #searchfrm .button {
+	font-size: 78%;
+        margin-bottom: 5px;
+    }
+
+    #brandbar #searchfrm .textbox {
+        top: 0px;
+	font-size: 90%;
+	width: 12em;
+    }
+
+    .rtl {
+      	direction: rtl;
+    } 
+  

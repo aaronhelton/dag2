@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:readers>
+      <map:reader name="ConcatenationReader" src="org.dspace.app.xmlui.cocoon.ConcatenationReader"/>
+    </map:readers>
+  </map:components>
+  <map:pipelines>
+    <map:component-configurations>
+      <global-variables>
+        <theme-path>dag2</theme-path>
+        <theme-name>dag</theme-name>
+      </global-variables>
+    </map:component-configurations>
+    <map:pipeline>
+      <!-- This pipeline is for static content, which can be cached for one hour. -->
+      <!-- <map:parameter name="expires" value="access plus 1 hours"/> -->
+      <map:parameter name="expires" value="now"/>
+      <map:match pattern="themes/*/**.js">
+        <map:read type="ConcatenationReader" src="{2}.js">
+          <map:parameter name="requestQueryString" value="{request:queryString}"/>
+        </map:read>
+      </map:match>
+      <map:match pattern="themes/*/**.css">
+        <map:read type="ConcatenationReader" src="{2}.css">
+          <map:parameter name="requestQueryString" value="{request:queryString}"/>
+        </map:read>
+      </map:match>
+      <map:match pattern="themes/*/**.json">
+        <map:read type="ConcatenationReader" src="{2}.json">
+          <map:parameter name="requestQueryString" value="{request:queryString}"/>
+        </map:read>
+      </map:match>
+      <map:match pattern="themes/*/**">
+        <map:read src="{2}"/>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline>
+      <!-- This part handles dynamic content.  Dynamic content is never cached. -->
+      <map:parameter name="expires" value="now"/>
+      <map:match pattern="**">
+        <!-- Step 1: Generate DRI page -->
+        <map:generate type="file" src="cocoon://DRI/{1}"/>
+        <!-- Step 2: Add page metadata
+                Could this be used to do the social media integrations like Open Graph, etc?
+        -->
+        <map:transform type="IncludePageMeta">
+          <map:parameter name="stylesheet.screen#1" value="lib/css/bootstrap.css"/>
+          <map:parameter name="stylesheet.screen#2" value="lib/css/bootstrap-responsive.css"/>
+          <map:parameter name="stylesheet.screen#3" value="lib/css/datepicker.css"/>
+          <map:parameter name="stylesheet.screen#4" value="lib/css/style.css"/>
+        </map:transform>
+        <map:transform type="IncludePageMeta">
+          <map:parameter name="javascript#1" value="lib/js/jquery.js"/>
+          <map:parameter name="javascript#2" value="lib/js/jquery-ui.js"/>
+          <map:parameter name="javascript#3" value="lib/js/bootstrap.js"/>
+          <map:parameter name="javascript#4" value="lib/js/bootstrap-datepicker.js"/>
+          <map:parameter name="theme.path" value="{global:theme-path}"/>
+          <map:parameter name="theme.name" value="{global:theme-name}"/>
+        </map:transform>
+        <map:match type="request" pattern="XML">
+          <map:serialize type="xml"/>
+        </map:match>
+        <!-- Step 3: Transform to XHTML -->
+        <map:transform src="{global:theme-name}.xsl"/>
+        <!-- Step 4: Internationalize -->
+        <map:act type="locale">
+          <map:transform type="i18n">
+            <map:parameter name="locale" value="{locale}"/>
+          </map:transform>
+        </map:act>
+        <!-- Step 5: Serialize to the browser -->
+        <map:serialize type="xhtml"/>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>
+
