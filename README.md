@@ -1,4 +1,4 @@
-DSpace-Themes
+dag2 DSpace Theme
 =============
 
 An XMLUI-based DSpace theme for DSpace 3x using Bootstrap and (eventually) HTML5.  
